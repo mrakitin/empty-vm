@@ -36,39 +36,11 @@ source $HOME/mambaforge/etc/profile.d/conda.sh
 # Info
 env | sort -u
 
-# Create a dev conda env
-which conda
-conda create -c conda-forge -y -n wormland python=3.10 ipython nodejs
-
-# Clone the repo
+# Make a source dir for repos
 mkdir -p $HOME/src/
-if [ ! -d "$HOME/src/bnl-wormland" ]; then
-    cp -rv /repo/ $HOME/src/bnl-wormland
-fi
 
-cd $HOME/src/bnl-wormland/
-
-conda activate wormland
-pip install -r backend/requirements.txt -r backend/requirements-dev.txt
-
-# Install playwright and its dependencies
-pip install playwright
-playwright install
-playwright install-deps
-
-# Build docker images
-docker build -t frontend -f docker/Dockerfile.frontend .
-docker build -t backend -f docker/Dockerfile.backend .
-docker images
-sed -i -r 's#http://127.0.0.1:8000#http://backend#' frontend/vite.config.js
-
-( cd frontend && npm install )
-
-docker compose -f docker/docker-compose.yml up --detach
-
-sleep 10
-
-docker compose -f docker/docker-compose.yml ps -a
-
-python test_end_to_end.py
-
+# TODO: may be useful in the future.
+# # Install playwright and its dependencies
+# pip install playwright
+# playwright install
+# playwright install-deps

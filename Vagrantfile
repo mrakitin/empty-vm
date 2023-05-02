@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8081, host: 8081, host_ip: "127.0.0.1"  # nginx port for /sirepo
   config.vm.network "forwarded_port", guest: 7000, host: 7000, host_ip: "127.0.0.1"  # uwsgi port
 
-  config.vm.synced_folder ".", "/repo"
+  # config.vm.synced_folder ".", "/repo"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "sirepo-raydata-vm"
