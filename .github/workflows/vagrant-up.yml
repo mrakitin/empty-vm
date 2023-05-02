@@ -1,0 +1,56 @@
+name: vagrant-up
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  vagrant-up:
+    name: Build and run vagrant box
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+    env:
+      TZ: America/New_York
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - name: Set env vars
+        run: |
+          export REPOSITORY_NAME=${GITHUB_REPOSITORY#*/}  # just the repo, as opposed to org/repo
+          echo "REPOSITORY_NAME=${REPOSITORY_NAME}" >> $GITHUB_ENV
+
+          export VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+          echo "VAGRANT_DISABLE_VBOXSYMLINKCREATE=${VAGRANT_DISABLE_VBOXSYMLINKCREATE}" >> $GITHUB_ENV
+
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Show vagrant version
+        run: vagrant --version
+
+      # - name: Install vagrant plugins
+      #   run: |
+      #     set -vxeuo pipefail
+      #     # vagrant plugin install vagrant-vbguest --plugin-version 0.21
+      #     # vagrant plugin install vagrant-disksize
+      #     vagrant plugin install vagrant-secret
+
+      - name: vagrant up
+        run: |
+          set -vxeuo pipefail
+          vagrant up
+
+      - name: export vm
+        run: |
+          set -vxeuo pipefail
+          vagrant package --vagrantfile Vagrantfile --output VM
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: VM
+          path: VM
+          retention-days: 30
