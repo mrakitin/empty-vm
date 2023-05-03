@@ -29,8 +29,9 @@ $ vagrant ssh
 ## Destroy the VM and start over
 
 ```console
-$ cd <bnl-wormland-repo>/vm/
 $ vagrant destroy --force
+$ vagrant box list
+$ vagrant box remove sirepo-raydata-vm
 ```
 
 ## Load the generated VM
@@ -40,8 +41,9 @@ file named `sirepo-raydata-vm.box`. Then run the following commands:
 
 ```console
 $ vagrant box add sirepo-raydata-vm sirepo-raydata-vm.box
+$ vagrant box list
 $ vagrant init sirepo-raydata-vm sirepo-raydata-vm.box
-$ vagrant up
+$ vagrant up --no-provision
 $ vagrant ssh
 ```
 
