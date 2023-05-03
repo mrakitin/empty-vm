@@ -8,7 +8,14 @@ sudo rm -f /home/vagrant/.wget-hsts
 
 # Install X11 for matplotlib, etc.
 sudo apt-get update
-sudo apt-get install -y xserver-xorg-core x11-utils x11-apps httpie feh
+sudo apt-get install -y xserver-xorg-core x11-utils x11-apps
+
+# Install HTTP servers/clients
+sudo apt-get install -y apache2 nginx
+sudo apt-get install -y httpie
+
+# Install utilities
+sudo apt-get install -y feh
 
 # Install docker per https://docs.docker.com/engine/install/ubuntu/
 sudo apt-get remove -y docker docker-engine docker.io containerd runc || true
@@ -27,4 +34,3 @@ sudo usermod -aG docker vagrant
 
 # Test docker under root
 sudo docker run hello-world
-

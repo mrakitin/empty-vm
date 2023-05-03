@@ -11,7 +11,7 @@ platform.
 
 ## Start the VM:
 
-```bash
+```console
 $ vagrant up
 ```
 
@@ -22,13 +22,34 @@ images.
 
 On the host machine:
 
-```bash
+```console
 $ vagrant ssh
 ```
 
 ## Destroy the VM and start over
 
-```bash
+```console
 $ cd <bnl-wormland-repo>/vm/
 $ vagrant destroy --force
 ```
+
+## Load the generated VM
+
+Download a generated .zip archive from GHA artifacts and unpack it to have the
+file named `sirepo-raydata-vm.box`. Then run the following commands:
+
+```console
+$ vagrant box add sirepo-raydata-vm sirepo-raydata-vm.box
+$ vagrant init sirepo-raydata-vm sirepo-raydata-vm.box
+$ vagrant up
+$ vagrant ssh
+```
+
+### Docs
+- https://developer.hashicorp.com/vagrant/docs/cli/package
+- https://stackoverflow.com/a/20680816/4143531
+
+
+## General notes
+
+https://ctrlnotes.com/vagrant-advanced-examples/#-insert-custom-ssh-public-key-to-the-vm

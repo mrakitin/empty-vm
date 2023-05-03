@@ -46,11 +46,11 @@ jobs:
       - name: export vm
         run: |
           set -vxeuo pipefail
-          vagrant package --vagrantfile Vagrantfile --output VM
+          vagrant package --vagrantfile Vagrantfile --output ${REPOSITORY_NAME}.box
 
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.REPOSITORY_NAME }}
-          path: VM
+          path: ${{ env.REPOSITORY_NAME }}.box
           retention-days: 30
