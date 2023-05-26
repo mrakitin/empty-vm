@@ -36,8 +36,30 @@ source $HOME/mambaforge/etc/profile.d/conda.sh
 # Info
 env | sort -u
 
+# Create a conda environment for sirepo-bluesky
+conda create -n sirepo-bluesky python=3.10 -c conda-forge python=3.10 ipython
+conda activate sirepo-bluesky
+pip install sirepo-bluesky
+pip list
+conda list
+
 # Make a source dir for repos
 mkdir -p $HOME/src/
+
+# Clone the repo for dev:
+git clone https://github.com/NSLS-II/sirepo-bluesky
+cd sirepo-bluesky/
+pip install -r requirements-dev.txt
+
+# Start Sirepo Docker container:
+bash scripts/start_sirepo -d
+
+# Copy databroker config:
+mkdir -v -p ~/.config/databroker/
+cp -v examples/local.yml ~/.config/databroker/
+
+# Run tests to make sure the code is working:
+pytest -s -vv
 
 # TODO: may be useful in the future.
 # # Install playwright and its dependencies
