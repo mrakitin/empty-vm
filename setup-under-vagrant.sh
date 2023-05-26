@@ -37,7 +37,7 @@ source $HOME/mambaforge/etc/profile.d/conda.sh
 env | sort -u
 
 # Create a conda environment for sirepo-bluesky
-conda create -n sirepo-bluesky python=3.10 -c conda-forge python=3.10 ipython
+conda create -n sirepo-bluesky -c conda-forge python=3.10 ipython
 conda activate sirepo-bluesky
 pip install sirepo-bluesky
 pip list
