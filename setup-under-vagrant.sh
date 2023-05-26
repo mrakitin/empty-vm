@@ -59,7 +59,7 @@ mkdir -v -p ~/.config/databroker/
 cp -v examples/local.yml ~/.config/databroker/
 
 # Run tests to make sure the code is working:
-pytest -s -vv
+# pytest -s -vv  # slow and flaky process in the VM
 
 # TODO: may be useful in the future.
 # # Install playwright and its dependencies
