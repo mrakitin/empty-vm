@@ -52,7 +52,7 @@ cd sirepo-bluesky/
 pip install -r requirements-dev.txt
 
 # Start Sirepo Docker container:
-bash scripts/start_sirepo -d
+bash scripts/start_sirepo.sh -d
 
 # Copy databroker config:
 mkdir -v -p ~/.config/databroker/
