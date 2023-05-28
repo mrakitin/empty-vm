@@ -2,6 +2,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-23.04"
   config.vm.box_check_update = true
 
+  config.vbguest.auto_update = false if Vagrant.has_plugin?("vagrant-vbguest")
+
   config.vm.network "private_network", ip: "192.168.56.0"
   config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"  # httpd or flask port
   config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"  # nginx port
