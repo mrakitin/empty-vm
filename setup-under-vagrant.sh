@@ -44,7 +44,7 @@ pip list
 conda list
 
 # Make a source dir for repos
-mkdir -p $HOME/src/
+mkdir -p $HOME/src/ && cd $HOME/src/
 
 # Clone the repo for dev:
 git clone https://github.com/NSLS-II/sirepo-bluesky
