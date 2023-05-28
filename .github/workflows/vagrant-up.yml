@@ -3,9 +3,15 @@ name: vagrant-up
 on:
   push:
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 4 * * 0'  # at 04:00 on Sunday (https://crontab.guru/#00_4_*_*_0)
 
 jobs:
   vagrant-up:
+    # pull requests are a duplicate of a branch push if within the same repo.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+
     name: Build and run vagrant box
     runs-on: macos-latest
     strategy:
@@ -24,6 +30,9 @@ jobs:
 
           export VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
           echo "VAGRANT_DISABLE_VBOXSYMLINKCREATE=${VAGRANT_DISABLE_VBOXSYMLINKCREATE}" >> $GITHUB_ENV
+
+          export DATETIME_STRING=$(date +%Y%m%d%H%M%S)
+          echo "DATETIME_STRING=${DATETIME_STRING}" >> $GITHUB_ENV
 
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -51,6 +60,6 @@ jobs:
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.REPOSITORY_NAME }}
+          name: ${{ env.REPOSITORY_NAME }}-${{ env.DATETIME_STRING }}
           path: ${{ env.REPOSITORY_NAME }}.box
-          retention-days: 30
+          retention-days: 90
