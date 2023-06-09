@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder ".", "/repo"
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "sirepo-raydata-vm"
+    vb.name = "sirepo-vm"
     vb.gui = false
     # vb.memory = "4096"
     # vb.cpus = 4
