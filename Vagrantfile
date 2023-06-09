@@ -5,9 +5,7 @@ Vagrant.configure("2") do |config|
   config.vbguest.auto_update = false if Vagrant.has_plugin?("vagrant-vbguest")
 
   config.vm.network "private_network", ip: "192.168.56.0"
-  config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"  # httpd or flask port
-  config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"  # nginx port
-  config.vm.network "forwarded_port", guest: 7000, host: 7000, host_ip: "127.0.0.1"  # uwsgi port
+  config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"  # flask port
   config.vm.network "forwarded_port", guest: 8888, host: 8888, host_ip: "127.0.0.1"  # jupyter port
   config.vm.network "forwarded_port", guest: 27017, host: 27017, host_ip: "127.0.0.1"  # mongodb port
 
