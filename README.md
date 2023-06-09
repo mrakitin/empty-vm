@@ -9,7 +9,9 @@ Install VirtualBox from https://www.virtualbox.org.
 Install Vagrant from https://developer.hashicorp.com/vagrant/downloads for your
 platform.
 
-## Start the VM:
+## Use case 1: build the VM locally
+
+### Start the VM:
 
 ```console
 $ vagrant up
@@ -18,7 +20,7 @@ $ vagrant up
 That should perform all building steps and even will run the test with the built
 images.
 
-## Interactive use
+### Interactive use
 
 On the host machine:
 
@@ -26,7 +28,7 @@ On the host machine:
 $ vagrant ssh
 ```
 
-## Destroy the VM and start over
+### Destroy the VM and start over
 
 ```console
 $ vagrant destroy --force
@@ -34,7 +36,7 @@ $ vagrant box list
 $ vagrant box remove sirepo-vm
 ```
 
-## Load the generated VM
+## Use case 2: load the generated VM
 
 Download a generated .zip archive from GHA artifacts and unpack it to have the
 file named `sirepo-vm.box`. Then run the following commands:
