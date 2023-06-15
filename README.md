@@ -39,12 +39,12 @@ $ vagrant box remove sirepo-vm
 ## Use case 2: load the generated VM
 
 Download a generated .zip archive from GHA artifacts and unpack it to have the
-file named `sirepo-vm.box`. Then run the following commands:
+file named `empty-vm.box`. Then run the following commands:
 
 ```console
-$ vagrant box add sirepo-vm sirepo-vm.box
+$ vagrant box add empty-vm empty-vm.box
 $ vagrant box list
-$ vagrant init sirepo-vm sirepo-vm.box
+$ vagrant init empty-vm empty-vm.box
 $ vagrant up --no-provision
 $ vagrant ssh
 ```
