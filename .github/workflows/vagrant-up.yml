@@ -56,6 +56,8 @@ jobs:
         run: |
           set -vxeuo pipefail
           vagrant package --vagrantfile Vagrantfile --output ${REPOSITORY_NAME}.box
+          ls -laF
+          stat ${REPOSITORY_NAME}.box
 
       - name: upload artifacts
         uses: actions/upload-artifact@v3
